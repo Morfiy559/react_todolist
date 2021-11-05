@@ -1,9 +1,14 @@
 import React, {useState} from "react";
+// Для стилизации использловал scss module
 import s from './Todo.module.scss';
 
+//Деструктурируем объект с входными параметрами
 const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
+    //Создаём local state с помощью hook`ов useState
+    // для процедуры изменения поля текст определённого дела
     const [editMode, setEditMode] = useState(false);
     const [updatedText, setUpdatedText] = useState('');
+    //Изменение режима редактирования дела и отправка обновлённых данных в store
     const editTodo = () => {
         if (editMode) {
             setEditMode(false)
@@ -13,6 +18,7 @@ const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
             setUpdatedText(text)
         }
     }
+    //Изменение текущего обновлённого текста
     const updateText = e => {
         setUpdatedText(e.target.value)
     }
@@ -22,10 +28,9 @@ const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
                 editMode ?
                     <input onChange={updateText} type="text" value={updatedText}/>
                     :
-                    <div>id:{id}_text:{text}_date:{date}</div>
+                    <div>({id})text:{text}_date:{date}</div>
 
             }
-
             <button onClick={editTodo}>Изменить</button>
             <button onClick={() => toggleDone(id)}>{done ? 'Сделано' : 'Не сделано'}</button>
             <button onClick={() => deleteTodo(id)}>REMOVE</button>

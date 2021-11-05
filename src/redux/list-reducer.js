@@ -1,15 +1,16 @@
+//Названия действий
 const SET_TODO = 'SET_TODO';
 const DELETE_TODO = 'DELETE_TODO';
 const TOGGLE_DONE = 'TOGGLE_DONE';
 const SET_INPUT_VALUE = 'SET_INPUT_VALUE';
 const UPDATE_TODO = 'UPDATE_TODO';
-
+//Начальное состояние state
 const initialState = {
     list: [],
     nextId: 0,
     inputValue: '',
 }
-
+//Обрабатываем действия
 const listReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_TODO:
@@ -68,9 +69,11 @@ const listReducer = (state = initialState, action) => {
             return state
     }
 }
+//Создатели действий
 export const setTodo = (text) => ({type: SET_TODO, text})
 export const deleteTodo = id => ({type: DELETE_TODO, id})
 export const toggleDone = id => ({type: TOGGLE_DONE, id})
 export const setInputValue = (value) => ({type: SET_INPUT_VALUE, value})
 export const updateTodo = (id,text) =>({type:UPDATE_TODO,id,text})
+
 export default listReducer;
