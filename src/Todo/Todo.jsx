@@ -31,9 +31,11 @@ const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
                     <div>({id})text:{text}_date:{date}</div>
 
             }
-            <button onClick={editTodo}>Изменить</button>
-            <button onClick={() => toggleDone(id)}>{done ? 'Сделано' : 'Не сделано'}</button>
-            <button onClick={() => deleteTodo(id)}>REMOVE</button>
+            <div className={s.buttons}>
+                <button onClick={editTodo}>Изменить</button>
+                <button onClick={() => toggleDone(id)}>{done ? 'Сделано' : 'Не сделано'}</button>
+                <button onClick={() => deleteTodo(id)}>REMOVE</button>
+            </div>
         </div>
 
     )
