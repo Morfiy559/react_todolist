@@ -1,6 +1,32 @@
 import React, {useState} from "react";
-// Для стилизации использловал scss module
-import s from './Todo.module.scss';
+// Для стилизации использловал styled-components/native
+import styled from "styled-components/native";
+// import {Button} from "react-native-web";
+
+//Создаю стилизованные компоненты
+const TODO = styled.View`
+  border: black 1px solid;
+  border-radius: 5px;
+  margin: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+  //flex-direction: row;
+  width: 100%;
+  max-width: 600px;
+`;
+const Buttons = styled.View`
+  gap: 5px;
+  flex-direction: row;
+`;
+const TextInput = styled.TextInput`
+  border: black 1px solid;
+  font-size: 20px;
+`;
+const Text = styled.Text`
+  font-size: 20px;
+`;
+const Button = styled.Button`
+`;
 
 //Деструктурируем объект с входными параметрами
 const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
@@ -23,20 +49,20 @@ const Todo = ({id, text, date, done, deleteTodo, toggleDone, updateTodo}) => {
         setUpdatedText(e.target.value)
     }
     return (
-        <div className={s.todo}>
+        <TODO>
             {
                 editMode ?
-                    <input onChange={updateText} type="text" value={updatedText}/>
+                    <TextInput onChange={updateText} value={updatedText} maxLength={20}/>
                     :
-                    <div>({id})text:{text}_date:{date}</div>
+                    <Text>({id})text:{text} date:{date}</Text>
 
             }
-            <div className={s.buttons}>
-                <button onClick={editTodo}>{editMode?'Применить':'Изменить'}</button>
-                <button onClick={() => toggleDone(id)}>{done ? 'Сделано' : 'Не сделано'}</button>
-                <button onClick={() => deleteTodo(id)}>REMOVE</button>
-            </div>
-        </div>
+            <Buttons>
+                <Button onPress={editTodo} title={editMode ? 'Применить' : 'Изменить'}/>
+                <Button onPress={() => toggleDone(id)} title={done ? 'Сделано' : 'Не сделано'}/>
+                <Button onPress={() => deleteTodo(id)} title={'Remove'}/>
+            </Buttons>
+        </TODO>
 
     )
 }

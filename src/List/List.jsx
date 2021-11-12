@@ -1,15 +1,21 @@
 import React from "react";
 import Todo from "../Todo/Todo";
 import {connect} from "react-redux";
-// Для стилизации использловал scss module
-import s from './List.module.scss';
 import {deleteTodo, toggleDone, updateTodo} from "../redux/list-reducer";
+//Стилизую с помощью styled-components/native
+import styled from "styled-components/native";
+//Создаю стилизованные компоненты
+
+const View = styled.View`
+  margin-top: 10px;
+  align-items: center;
+`;
 
 //Деструктурируем объект с входными параметрами
 const List = ({list,deleteTodo,toggleDone,updateTodo})=>{
     //Выводим массив компонентов дел с передачей в каждый определённых параметров
     return(
-        <div className={s.list}>
+        <View>
             {list.map(todo=><Todo
                 key={todo.id}
                 id={todo.id}
@@ -20,7 +26,7 @@ const List = ({list,deleteTodo,toggleDone,updateTodo})=>{
                 toggleDone={toggleDone}
                 updateTodo={updateTodo}
             />)}
-        </div>
+        </View>
     )
 }
 
